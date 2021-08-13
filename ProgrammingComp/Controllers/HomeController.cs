@@ -55,14 +55,12 @@ namespace ProgrammingComp.Controllers
         [HttpPost]
         public ActionResult Index(SubmitTaskViewModel submiTtaskVM)
         {
-            ViewBag.DBSuccess = SendCodetoDNFiddle(submiTtaskVM);
-
+            SendCodetoDNFiddle(submiTtaskVM);
             return View("About");
         }
 
-        private bool SendCodetoDNFiddle(SubmitTaskViewModel submiTtaskVM)
+        private void SendCodetoDNFiddle(SubmitTaskViewModel submiTtaskVM)
         {
-            bool success = false;
             if (!string.IsNullOrEmpty(submiTtaskVM.Solution))
             {
                 string code = submiTtaskVM.Solution;
@@ -86,12 +84,15 @@ namespace ProgrammingComp.Controllers
                 IRestResponse<FiddleExecuteResult> response = client.Execute<FiddleExecuteResult>(request);
                 if (response != null && response.StatusCode == HttpStatusCode.OK)
                 {
-                    ViewBag.ProgramOutput = response.Data.ConsoleOutput.ToString();
-                    if (SaveDatainDB(submiTtaskVM, response.Data.ConsoleOutput.ToString()))
-                        success = true;
+                    ViewBag.HasCompilationError = false;
+                    if (response.Data.HasCompilationErrors)
+                    {
+                        ViewBag.HasCompilationError = true;
+                        ViewBag.ProgramOutput = response.Data.ConsoleOutput.ToString();
+                    }
+                    SaveDatainDB(submiTtaskVM, response.Data.ConsoleOutput.ToString());
                 }
             }
-            return success;
         }
 
 
