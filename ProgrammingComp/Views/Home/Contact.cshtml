@@ -1,0 +1,50 @@
+﻿@model List<ProgrammingComp.ViewModels.ShowTop3VM>
+
+
+@{
+    ViewBag.Title = "Top 3";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            <p>Name</p>
+        </th>
+        <th>
+            <p>Success Solutions</p>
+        </th>
+        <th>
+            <p>Tasks</p>
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Submissions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task)
+                </td>
+
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                <h4>No Tasks Submitted</h4>
+            </td>
+        </tr>
+    }
+</table>
+

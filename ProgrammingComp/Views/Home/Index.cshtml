@@ -1,0 +1,70 @@
+﻿@model ProgrammingComp.ViewModels.SubmitTaskViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<script type="text/javascript">
+    function SelectedIndexChanged(element) {
+        var optionSelected = $("option:selected", element);
+        var selectedTaskDescription = $(optionSelected).attr('data-taskdesc');
+        $('label[for="description"]').html(selectedTaskDescription);
+    }
+</script>
+
+<div class="jumbotron">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <div class="row input-lg ">
+            <div class="col-md-12">
+                <label>Please use C# code to submit your selected task solution</label>
+            </div>
+        </div>
+        <div class="row input-lg">
+            <div class="col-md-2">
+                <label>Name</label>
+            </div>
+            <div class="col-md-10">
+                @Html.TextBox("name", null, new { autocomplete = "off" })
+            </div>
+        </div>
+        <div class="row input-lg">
+            <div class="col-md-2">
+                <label>Select Task</label>
+            </div>
+            <div class="col-md-10">
+                <select name="task" id="task" onchange="SelectedIndexChanged(this)" style="max-width:500px;width:227px;height:32px" }>
+                    <option value="0" data-taskdesc="">Select Task</option>
+                    @if (ViewBag.TaskList != null)
+                    {
+                        foreach (var item in ViewBag.TaskList)
+                        {
+                            <option value="@item.taskID" data-taskdesc="@item.taskDescription">@item.taskName</option>
+                        }
+                    }
+                </select>
+
+            </div>
+        </div>
+        <div class="row input-lg">
+            <div class="col-md-2">
+                <label>Description</label>
+            </div>
+            <div class="col-md-10">
+                @Html.Label("description", "Selected task Description")
+            </div>
+        </div>
+        <div class="row input-lg">
+            <div class="col-md-2">
+                <label>Solution Code</label>
+            </div>
+            <div class="col-md-10">
+                @Html.TextArea("solution", "", new { @style = "max-width:500px;width:350px;height:420px" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" id="submitsolution" value="Submit" style="width:100px;color:white;background-color:grey">
+            </div>
+        </div>
+    }
+</div>

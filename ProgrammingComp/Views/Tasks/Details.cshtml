@@ -1,0 +1,50 @@
+﻿@model ProgrammingComp.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.taskName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskInputParams)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskInputParams)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taskOutputParams)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taskOutputParams)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.taskID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
