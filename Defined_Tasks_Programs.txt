@@ -1,0 +1,71 @@
+//Find Day name based on given date
+
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+	int[] month = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            string[] week = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+            int date, mon, year, i, s = 0;
+            DateTime dt = new DateTime(1683, 3, 16);
+            mon = dt.Month;
+            year = dt.Year;
+            date = dt.Day;
+
+            if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0)))
+                month[1] = 29;
+            for (i = 0; i < mon - 1; i++)
+                s = s + month[i];
+            s = s + (date + year + (year / 4) - 2);
+            s = s % 7;
+            
+            Console.WriteLine(week[s].ToString());
+
+    }
+}
+
+// Harmonic series
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+
+	int i,n;
+   double s=0.0;
+   n= 500;    
+   for(i=1;i<=n;i++)
+   {
+          s+=1/(float)i;
+   }
+   Console.Write(s);
+
+	}
+}
+
+//Fibonacci series 
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int input, first = 0, second = 1, third = 0;
+        
+        input = 13;
+       
+        for (int i = 3; i <= input; i++)
+        {
+            third = first + second;
+            
+            first = second;
+            second = third;
+        }
+		
+		 Console.Write(third);
+	}
+		 
+}
